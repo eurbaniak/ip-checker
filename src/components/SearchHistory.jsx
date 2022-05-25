@@ -18,14 +18,13 @@ const SearchHistory = ({ searchHistory, clearHistory }) => {
           </tr>
         </thead>
         <tbody>
-          {searchHistory &&
-            searchHistory.map((search, index) => {
-              return (
-                <tr key={index}>
-                  <td key={index}>{search}</td>
-                </tr>
-              );
-            })}
+          {searchHistory?.map((search, index) => {
+            return (
+              <tr key={index}>
+                <td key={index}>{search}</td>
+              </tr>
+            );
+          })}
         </tbody>
       </table>
     </div>

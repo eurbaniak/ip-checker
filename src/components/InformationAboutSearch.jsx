@@ -5,7 +5,7 @@ const InformationAboutSearch = ({ ipInfo, error }) => {
   const queryKeys = Object.keys(ipInfo);
 
   const filteredKeys = queryKeys.filter((key) => {
-    return key !== "status" && key !== "lat" && key !== "lon" && key !== "as";
+    return !["status", "lat", "lon", "as"].includes(key);
   });
 
   return (
@@ -18,7 +18,7 @@ const InformationAboutSearch = ({ ipInfo, error }) => {
         filteredKeys.map((key, index) => {
           return (
             <p className="is-size-5" key={index}>
-              {key}: {ipInfo[key] ? ipInfo[key] : "-"}
+              {key}: {ipInfo[key] || "N/A"}
             </p>
           );
         })}

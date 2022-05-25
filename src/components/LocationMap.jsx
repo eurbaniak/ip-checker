@@ -29,15 +29,7 @@ const LocationMap = ({ ipInfo, error }) => {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         <ChangeMapView position={position} />
-        <Marker position={position}>
-          <Popup>
-            ip: {ipInfo?.ip} <br />
-            city: {ipInfo?.city} <br />
-            country: {ipInfo?.country} <br />
-            region: {ipInfo?.region} <br />
-            zip-code: {ipInfo?.zip} <br />
-          </Popup>
-        </Marker>
+        <Marker position={position}></Marker>
       </MapContainer>
     </div>
   );
