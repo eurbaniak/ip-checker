@@ -1,10 +1,14 @@
 import axios from "axios";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 
 const useFetchIP = (ip) => {
   const [ipInfo, setIpInfo] = useState(null);
   const [error, setError] = useState(null);
-  const [searchHistory, setSearchHistory] = useState([]);
+  const [searchHistory, setSearchHistory] = useState(
+    sessionStorage.getItem("searchHistory")
+      ? JSON.parse(sessionStorage.getItem("searchHistory"))
+      : []
+  );
 
   const getIpInfo = useCallback(() => {
     setError(null);
@@ -13,12 +17,8 @@ const useFetchIP = (ip) => {
         setError(res.data.message);
       }
       if (res.data.status === "success") {
-        if (searchHistory.includes(ip)) {
-          return;
-        }
         setSearchHistory([...searchHistory, res.data.query]);
       }
-      //TODO - add history to session storage
       setIpInfo({
         ip: res.data.query,
         city: res.data.city,
@@ -35,7 +35,16 @@ const useFetchIP = (ip) => {
     });
   }, [ip]);
 
-  return { ipInfo, getIpInfo, error, searchHistory };
+  useEffect(() => {
+    sessionStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+  }, [searchHistory]);
+
+  const clearHistory = useCallback(() => {
+    sessionStorage.clear();
+    setSearchHistory([]);
+  }, []);
+
+  return { ipInfo, getIpInfo, error, searchHistory, clearHistory };
 };
 
 export default useFetchIP;

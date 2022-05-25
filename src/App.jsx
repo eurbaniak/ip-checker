@@ -7,19 +7,23 @@ import SearchHistory from "./components/SearchHistory";
 
 const App = () => {
   const [query, setQuery] = useState("");
-  const { ipInfo, getIpInfo, error, searchHistory } = useFetchIP(query);
+  const { ipInfo, getIpInfo, error, searchHistory, clearHistory } =
+    useFetchIP(query);
 
   useEffect(getIpInfo, []);
 
   return (
     <div className="columns p-5 m-5">
       <div className="column is-vcentered is-8">
-        <Search setQuery={setQuery} getIpInfo={getIpInfo} error={error} />
         <LocationMap ipInfo={ipInfo} error={error} />
+        <Search setQuery={setQuery} getIpInfo={getIpInfo} error={error} />
       </div>
       <div className="column is-4">
         <InformationAboutSearch ipInfo={ipInfo} error={error} />
-        <SearchHistory searchHistory={searchHistory} />
+        <SearchHistory
+          searchHistory={searchHistory}
+          clearHistory={clearHistory}
+        />
       </div>
     </div>
   );

@@ -1,12 +1,20 @@
 import React from "react";
 
-const SearchHistory = ({ searchHistory }) => {
+const SearchHistory = ({ searchHistory, clearHistory }) => {
   return (
-    <div>
+    <div className="table-container">
       <table className="table is-striped is-fullwidth">
         <thead>
           <tr>
-            <td className="is-size-">Search history</td>
+            <td className="is-flex is-align-items-center is-justify-content-space-between">
+              Search history
+              <button
+                className="button is-small is-danger"
+                onClick={clearHistory}
+              >
+                delete history
+              </button>
+            </td>
           </tr>
         </thead>
         <tbody>
@@ -14,7 +22,7 @@ const SearchHistory = ({ searchHistory }) => {
             searchHistory.map((search, index) => {
               return (
                 <tr key={index}>
-                  <td>{search}</td>
+                  <td key={index}>{search}</td>
                 </tr>
               );
             })}

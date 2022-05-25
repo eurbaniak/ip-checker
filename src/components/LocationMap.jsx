@@ -31,10 +31,10 @@ const LocationMap = ({ ipInfo, error }) => {
         <ChangeMapView position={position} />
         <Marker position={position}>
           <Popup>
-            ip: {ipInfo?.query} <br />
+            ip: {ipInfo?.ip} <br />
             city: {ipInfo?.city} <br />
             country: {ipInfo?.country} <br />
-            region: {ipInfo?.regionName} <br />
+            region: {ipInfo?.region} <br />
             zip-code: {ipInfo?.zip} <br />
           </Popup>
         </Marker>
